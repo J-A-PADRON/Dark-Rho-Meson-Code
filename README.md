@@ -17,7 +17,7 @@ The code calculates the neutrino flux, interaction rates, and expected event rat
 
 ## Calculations
 
-- Spectrum $\rm{E^2\Phi$} vs Energy
+- Spectrum $\rm{E^2}\Phi$ vs Energy
 - BR and $\eta$ Contours \xi$ vs $m_\pi$
 - $\eta$ vs. $m_\nu$
 - $\eta$ vs. $\mathrm{BR}$
