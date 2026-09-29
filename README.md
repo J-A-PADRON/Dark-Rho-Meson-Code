@@ -17,15 +17,14 @@ The code calculates the neutrino flux, interaction rates, and expected event rat
 
 ## Calculations
 
-- $m_\pi$ vs. $\eta$
-- $m_\pi$ vs. $\mathrm{BR}$
+- Spectrum $\rm{E^2\Phi$} vs Energy
+- BR and $\eta$ Contours \xi$ vs $m_\pi$
+- $\eta$ vs. $m_\nu$
 - $\eta$ vs. $\mathrm{BR}$
-- $\zeta$ vs. $\eta$
-- $\zeta$ vs. $\mathrm{BR}$
 
 ## Requirements
-
-- Python 3.12+
+These versions were the versions used at the time our plots were created.
+- Python 3.12.10
 - Numpy 1.26.4
 - Scipy 1.13.0
 - Matplotlib 3.8.3
