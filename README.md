@@ -4,7 +4,7 @@
 
 This repository contains Python code for calculating neutrino interactions with dark matter through a dark $\rho$ meson and studying their effects on the neutrino flux observed by IceCube-Gen2.
 
-The code calculates the neutrino flux and expected event rates for different neutrino overdensities, branching ratios (${\rm BR}(\rho_D\to\nu\bar{\nu}$)), $m_\pi$, $\xi$, $m_\nu$ $\rm{E^2}\Phi$ and Energy.
+The code calculates the neutrino flux and expected events for different neutrino overdensities, branching ratios (${\rm BR}(\rho_D\to\nu\bar{\nu}$)), $m_\pi$, $\xi$, $m_\nu$, $\rm{E^2}\Phi$ and Energy.
 
 ## Structure
 
