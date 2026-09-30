@@ -10,7 +10,7 @@ The code calculates the neutrino flux and expected events for different neutrino
 
 - `src/` — Core calculation functions
 - `scripts/` — Scripts for running calculations and generating plots
-- `data/` — Input data and experimental/effective-area tables
+- `data/` — Input data/limits
 - `results/` — Generated numerical results
 - `figures/` — Generated plots
 - `requirements.txt` — Python package requirements.
