@@ -1,8 +1,10 @@
+import sys
+sys.path.append("../Source")
 from Functions import *
 
 Branch_Ratio_D = 1e-6
-
 A_eff_string = "Average"
+k_res = w_res = 100
 
 Cases = {
     "Average": (
@@ -10,27 +12,18 @@ Cases = {
         [20, 90, 2.2e2, 1e3],             # x-position of BR labels
         [1, 1,  1.1, 0.8],            # y-position of BR labels
         [55, 57, 61, 55]                     # Rotations
-    ),
-
-    "Electron": (
-        [8.5, 30, 1e3, 1e9],               # Overdensity
-        [3, 30, 100, 8e2],               # m_pi_D / xpos
-        [0.6, 1, 1.1, 0.8],              # xi / ypos
-        [30, 55, 61, 55]                   # Rotations
     )
 }
 
-Overdensity_plot, xpos, ypos, Rotations = Cases[A_eff_string]
+Eta_plot, xpos, ypos, Rotations = Cases[A_eff_string]
 
-k_res = w_res = 100
-
-with PdfPages("../PDFs/Eta - Plot.pdf") as pdf:
+with PdfPages("../Figures/Fig5b_Eta_BR_1e-6.pdf") as pdf:
     fig, ax = plt.subplots(figsize=(6, 6))
 
-    X = np.loadtxt(f"../Texts/X-{k_res}x{w_res}.csv", delimiter = " ")
-    Y = np.loadtxt(f"../Texts/Y-{k_res}x{w_res}.csv", delimiter = " ")
-    x, y = interpolate_function('../Texts/Bullet_Cluster - Copy.csv', True, 99, 0, 200)
-    p, v = interpolate_function('../Texts/Relic_Density - Copy.csv', True, 10, 0, 200)
+    X = np.loadtxt(f"../Results/M_pi-{k_res}x{w_res}.csv", delimiter = " ")
+    Y = np.loadtxt(f"../Results/Xi-{k_res}x{w_res}.csv", delimiter = " ")
+    x, y = interpolate_function('../Data/Bullet_Cluster - Copy.csv', True, 99, 0, 200)
+    p, v = interpolate_function('../Data/Relic_Density - Copy.csv', True, 10, 0, 200)
 
 #Bullet
     Bullet_Cluster, = ax.plot(x, y, '--', color='black')
@@ -55,21 +48,18 @@ with PdfPages("../PDFs/Eta - Plot.pdf") as pdf:
 
 
 #Colors
-    #cmap = matplotlib.colormaps.get_cmap(cmap_name)
     cmap = matplotlib.colormaps.get_cmap('tab10')
-    n = len(Overdensity_plot)
+    n = len(Eta_plot)
 
     colors = [cmap(i) for i in range(n)]
     colors[3] = 'purple'
 
     legend_handles = []
 
-    for idx, Xi_D in enumerate(Overdensity_plot):
-        #if idx != 2:
-        #    continue
+    for idx, Eta_D in enumerate(Eta_plot):
         sigma_levels = [-2]
-        fmt_dict = {-2: f"{Xi_D:.2e}"}
-        N = np.loadtxt(f"../Texts/N_Xi={Xi_D:.2e}-0.01ev-{k_res}x{w_res}-BR={Branch_Ratio_D:.2e}-{A_eff_string}_A_eff.csv", delimiter = " ")   
+        fmt_dict = {-2: f"{Eta_D:.2e}"}
+        N = np.loadtxt(f"../Results/N_Eta_Contours-Eta={Eta_D:.2e}-BR={Branch_Ratio_D:.2e}-{k_res}x{w_res}.csv", delimiter = " ")   
         CS = ax.contour(X, Y, N, linestyles = "-", levels=sigma_levels, colors=[colors[idx]], linewidths=2)
         ax.text(xpos[idx], ypos[idx], f"$\\eta$ = {sci_label_unicode(float(fmt_dict[-2]), -1)}",  ha="center", va="center", fontsize=14, color = colors[idx], rotation = Rotations[idx])
         
@@ -78,13 +68,11 @@ with PdfPages("../PDFs/Eta - Plot.pdf") as pdf:
     ax.set_xlim(left=1 , right = 2e3)
     ax.set_ylim(bottom=0 , top=5)   
     ax.set_xlabel(r"$m_{\pi_D}$ [MeV]", size = 16)
-    #ax.set_ylabel(r"$\zeta$", size = 14)
     ax.set_ylabel(r"$\xi = m_{\pi_D}/f_{\pi_D}$", size = 16)
     ax.set_xscale('log')
     plt.tick_params(direction="in",length=10,labelsize=16)
     plt.tick_params(which="minor",direction="in",length=4)
     plt.tick_params(axis='both', which='both', top=True, bottom=True, left=True, right=True)
     plt.tick_params(axis='x',pad=7)
-    #plt.grid()
     pdf.savefig(bbox_inches="tight")
     plt.close()

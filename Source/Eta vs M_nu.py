@@ -15,10 +15,10 @@ k = np.logspace(-9, -6, k_res)#m_nu [MeV]
 w = np.logspace(-2, 15, w_res) #Xi
 X, Y = np.meshgrid(k, w)
 
-np.savetxt(f"../results/M_nu-(Eta_vs_M_nu)-{k_res}x{w_res}.csv", X)
-np.savetxt(f"../results/Eta-(Eta_vs_M_nu)-{k_res}x{w_res}.csv", Y)
+np.savetxt(f"../Results/M_nu-(Eta_vs_M_nu)-{k_res}x{w_res}.csv", X)
+np.savetxt(f"../Results/Eta-(Eta_vs_M_nu)-{k_res}x{w_res}.csv", Y)
 
-x = np.loadtxt('../data/Flux vs Neutrino Energy Data.txt', delimiter = ",", usecols = 0)
+x = np.loadtxt('../Data/Flux vs Neutrino Energy Data - Original.txt', delimiter = ",", usecols = 0)
 x *= GeV
 
 legend_handles = []
@@ -71,7 +71,7 @@ for idx, Xi_D in enumerate(Xi_plot):
                         N_max[i, j] = N_std_grid[i, j]
                     E *= Ice_Cube_res
         
-        np.savetxt(f"../results/N_(Eta_vs_M_nu)_Contours-Xi={Xi_D:.2e}-M_pi={m_pi_D:.2e}-BR={Branch_Ratio_D:.2e}-{k_res}x{w_res}.csv", N_max)
+        np.savetxt(f"../Results/N_(Eta_vs_M_nu)_Contours-Xi={Xi_D:.2e}-M_pi={m_pi_D:.2e}-BR={Branch_Ratio_D:.2e}-{k_res}x{w_res}.csv", N_max)
         print("Done with M_pi =", m_pi_D)
     print("Done with Xi = ", Xi_D)
 

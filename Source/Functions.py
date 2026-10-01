@@ -45,16 +45,16 @@ E_neut = 2.9e13
 L_muon = 6.1e-61
 L_neut = 4.3e-60
 
-Old_Energy, Old_A_eff_Array = np.loadtxt('../Texts/Gen2_effective_areas.txt', delimiter = ",", unpack = True)
+Old_Energy, Old_A_eff_Array = np.loadtxt('../Data/Gen2_effective_areas.txt', delimiter = ",", unpack = True)
 A_eff_Old = interp1d(Old_Energy, Old_A_eff_Array, kind='linear', fill_value = 0, bounds_error = False) #Original file with x already in units of log10(eV)
 
-Electron_Energy, Electron_A_eff_Array = np.loadtxt('../Texts/Gen2_effective_areas - Electron - 27 AUG 2026.txt', delimiter = ",", unpack = True)
+Electron_Energy, Electron_A_eff_Array = np.loadtxt('../Data/Gen2_effective_areas - Electron - 27 AUG 2026.txt', delimiter = ",", unpack = True)
 A_eff_Electron = interp1d(np.log10(Electron_Energy * (GeV / eV)), Electron_A_eff_Array, kind='linear', fill_value = 0, bounds_error = False)
 
-Muon_Energy, Muon_A_eff_Array = np.loadtxt('../Texts/Gen2_effective_areas - Muon - 27 AUG 2026.txt', delimiter = ",", unpack = True)
+Muon_Energy, Muon_A_eff_Array = np.loadtxt('../Data/Gen2_effective_areas - Muon - 27 AUG 2026.txt', delimiter = ",", unpack = True)
 A_eff_Muon = interp1d(np.log10(Muon_Energy * (GeV / eV)), Muon_A_eff_Array, kind='linear', fill_value = 0, bounds_error = False)
 
-Tau_Energy, Tau_A_eff_Array = np.loadtxt('../Texts/Gen2_effective_areas - Tau - 27 AUG 2026.txt', delimiter = ",", unpack = True)
+Tau_Energy, Tau_A_eff_Array = np.loadtxt('../Data/Gen2_effective_areas - Tau - 27 AUG 2026.txt', delimiter = ",", unpack = True)
 A_eff_Tau = interp1d(np.log10(Tau_Energy * (GeV / eV)), Tau_A_eff_Array, kind='linear', fill_value = 0, bounds_error = False)
 
 A_eff_E_Range = np.logspace(16, 20, 200) #eV
@@ -62,7 +62,7 @@ A_eff_Average = interp1d(np.log10(A_eff_E_Range),(A_eff_Electron(np.log10(A_eff_
                 + A_eff_Muon(np.log10(A_eff_E_Range)) + A_eff_Tau(np.log10(A_eff_E_Range))) / 3, 
                 kind='linear', fill_value=0, bounds_error=False)
 
-Neutrino_Energy_Range = np.loadtxt('../Texts/Flux vs Neutrino Energy Data.txt', delimiter = ",", usecols = 0)
+Neutrino_Energy_Range = np.loadtxt('../Data/Flux vs Neutrino Energy Data - Original.txt', delimiter = ",", usecols = 0)
 Neutrino_Energy_Range *= GeV
 
 delta_M_S_squared = 7.5e-5 * (eV)**2 #MeV^2
@@ -71,7 +71,7 @@ Ice_Cube_res = 1.1
 M_L = 0.01 * eV #MeV
 M_M = 0.05 * eV #MeV
 M_H = 0.5 * eV #MeV
-Larray = np.loadtxt("../Texts/L_array.txt")
+Larray = np.loadtxt("../Data/L_array.txt")
 zarray = np.logspace(-7,np.log10(1100),1000)
 z_L = interp1d(Larray, zarray, kind='linear', bounds_error = False, fill_value='extrapolate')
 

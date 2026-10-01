@@ -1,12 +1,12 @@
+import sys
+sys.path.append("../Source")
 from Functions import *
-#================================================================================= initialization ====================================================================
-with PdfPages("../PDFs/Spectrum.pdf") as pdf:
-#=========================================================================== plot Flux vs Neutrino Energy ==========================================================================
+
+with PdfPages("../Figures/Events.pdf") as pdf:
     start_time = time.time()
-    #plot Flux vs Neutrino Energy
     plt.figure(figsize=(6, 6))
 
-    x , y = interpolate_function('../Texts/Events.txt', True, 0, 0, 100)
+    x , y = interpolate_function('../Results/Events.txt', True, 0, 0, 100)
     plt.plot(x, y, color="red", label = "Events", linewidth=2)
     
     plt.xscale('log')
